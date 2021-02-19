@@ -15,16 +15,22 @@ public class HomePage extends Page {
     @FindBy(linkText = "Онлайн-кинотеатры")
     private WebElement linkOnline;
 
-    @FindBy(css = "#tab-films > div.b-params-filter.m-25p > div > div > div:nth-child(1) > div > div > button")
+    @FindBy(xpath = "//button[@type='button' and @title='Жанры']")
     private WebElement buttonFilms;
 
-    @FindBy(css = "#tab-films > div.b-params-filter.m-25p > div > div > div:nth-child(1) > div > div > div > ul > li:nth-child(1) > a > span")
+    @FindBy(xpath = "//li[@rel='0']")
     private WebElement buttonComedy;
 
-    @FindBy()
+    @FindBy(xpath = "//div[@class='txt' and p[contains(text(),'Комедия, 2017')]]")
+    private WebElement comedy;
 
     public HomePage(WebDriver driver) {
         super(driver);
+    }
+
+    public boolean comedyIsTrue()
+    {
+        return isElementPresent(comedy);
     }
 
     public void ChooseComedy() {
@@ -32,13 +38,12 @@ public class HomePage extends Page {
         linkOnline.click();
         buttonFilms.click();
         buttonComedy.click();
-
     }
 
 
     @Override
     public void open() {
-        driver.get(ConfigProperties.getProperties("home.url"));
+        driver.get(ConfigProperties.getProperties("HOME_URL"));
     }
 
 }
