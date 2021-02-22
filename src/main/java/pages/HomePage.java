@@ -1,10 +1,12 @@
 package pages;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 import utils.ConfigProperties;
+
+import java.util.List;
 
 public class HomePage extends Page {
 
@@ -15,11 +17,8 @@ public class HomePage extends Page {
     @FindBy(linkText = "Онлайн-кинотеатры")
     private WebElement linkOnline;
 
-    @FindBy(xpath = "//button[@type='button' and @title='Жанры']")
+    @FindBy(css = "#tab-films .selectpicker[title='Жанры']")
     private WebElement buttonFilms;
-
-    @FindBy(xpath = "//li[@rel='0']")
-    private WebElement buttonComedy;
 
     @FindBy(xpath = "//div[@class='txt' and p[contains(text(),'Комедия, 2017')]]")
     private WebElement comedy;
@@ -37,7 +36,14 @@ public class HomePage extends Page {
         linkAfisha.click();
         linkOnline.click();
         buttonFilms.click();
-        buttonComedy.click();
+        List<WebElement> genres = driver.findElements
+                (By.cssSelector(".tab-content.active .dropdown-menu.inner.selectpicker li"));
+        for (WebElement genre : genres) {
+            if (genre.findElement(By.className("text")).getText().equals("Комедия")) {
+                genre.click();
+                break;
+            }
+        }
     }
 
 

@@ -1,6 +1,5 @@
 package pages;
 
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -15,23 +14,34 @@ public class CinemaPage extends Page {
         super(driver);
     }
 
+
     @FindBy(linkText = "Сериалы")
     private WebElement linkSerials;
 
-    @FindBy(xpath = "(//button[@type='button' and @title='Жанры'])[2]")
+    @FindBy(css = "#tab-tv-series .selectpicker[title='Жанры']")
     private WebElement buttonFilms;
 
-    @FindBy(xpath = "(//li[@rel='0'])[2]")
+    @FindBy(css = ".tab-content.active .dropdown-menu.inner.selectpicker li")
     private WebElement buttonDetective;
 
-    @FindBy(xpath = "//div[@class='txt' and p[contains(text(),'Детектив')]]")
-    private WebElement comedy;
+    @FindBy(xpath = "//div[@class='txt' and p[contains(text(),'Триллер, Детектив, 2014')]]")
+    private WebElement detective;
 
+    public boolean isTrueDetective() {
+        return isElementPresent(detective);
+    }
 
     public void ChooseDetective() {
         linkSerials.click();
         buttonFilms.click();
-        buttonDetective.click();
+        List<WebElement> genres = driver.findElements
+                (By.cssSelector(".tab-content.active .dropdown-menu.inner.selectpicker li"));
+        for (WebElement genre : genres) {
+            if (genre.findElement(By.className("text")).getText().equals("Детектив")) {
+                genre.click();
+                break;
+            }
+        }
     }
 
     @Override

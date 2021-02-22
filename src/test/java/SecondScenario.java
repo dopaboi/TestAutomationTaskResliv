@@ -4,6 +4,8 @@ import org.testng.annotations.Test;
 import pages.CinemaPage;
 import java.util.logging.Logger;
 
+import static org.testng.Assert.assertTrue;
+
 public class SecondScenario extends BasicTest {
 
     private CinemaPage CinemaPage = PageFactory.initElements(getWebDriver(), pages.CinemaPage.class);
@@ -14,6 +16,7 @@ public class SecondScenario extends BasicTest {
         logger.info("Starting scenario 2");
         CinemaPage.open();
         CinemaPage.ChooseDetective();
+        assertTrue(CinemaPage.isTrueDetective());
         logger.info("Finishing scenario 2");
     }
 
