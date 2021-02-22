@@ -24,7 +24,7 @@ public class BasicTest {
     protected WebDriver getWebDriver() {
 
         if (driver == null) {
-            //System.setProperty(ConfigProperties.getProperties("NAME_DRIVER"), ConfigProperties.getProperties("PATH_DRIVER"));
+            System.setProperty(ConfigProperties.getProperties("NAME_DRIVER"), ConfigProperties.getProperties("PATH_DRIVER"));
             driver = new ChromeDriver();
             driver.manage().window().maximize();
             driver.manage().timeouts().implicitlyWait(Long.parseLong(ConfigProperties.getProperties("IMPLICIT_WAIT")), TimeUnit.SECONDS);

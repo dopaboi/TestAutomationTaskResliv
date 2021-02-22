@@ -21,9 +21,6 @@ public class CinemaPage extends Page {
     @FindBy(css = "#tab-tv-series .selectpicker[title='Жанры']")
     private WebElement buttonFilms;
 
-    @FindBy(css = ".tab-content.active .dropdown-menu.inner.selectpicker li")
-    private WebElement buttonDetective;
-
     @FindBy(xpath = "//div[@class='txt' and p[contains(text(),'Триллер, Детектив, 2014')]]")
     private WebElement detective;
 
